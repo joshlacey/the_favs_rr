@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20170912145020) do
 
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
-    t.integer "latitude"
-    t.integer "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.string "address"
     t.string "img_url"
     t.datetime "created_at", null: false
