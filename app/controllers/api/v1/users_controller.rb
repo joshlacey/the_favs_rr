@@ -7,6 +7,8 @@ class Api::V1::UsersController < ApplicationController
 
     def create
       @user = User.create(user_params)
+      restaurants = params["restaurants"]
+      restaurants.each {|rest| @user.restaurants << Restaurant.find_by(id: rest[:restId])}
       render json: @user, status: 201
     end
 
@@ -17,7 +19,10 @@ class Api::V1::UsersController < ApplicationController
 
     def update
       @user = User.find(params[:id])
-      
+      restaurants = params["restaurants"]
+      restaurants.map {|rest| Restaurant.find_by(id: rest[:restId])}
+      @user.update(restaurants: restaurants)
+      render json @user, status: 200
     end
 
     private
