@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :create]
       resources :restaurants, only: [:index, :create, :destroy]
+      resources :dishes, only: [:index, :create, :show]
     end
   end
 end
