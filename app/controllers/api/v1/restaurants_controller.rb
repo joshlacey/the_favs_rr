@@ -11,8 +11,9 @@ class Api::V1::RestaurantsController < ApplicationController
 
     def destroy
       @restaurant = Restaurant.find_by(id: params[:id])
+      @dummy = Restaurant.find_by(id: params[:id])
       @restaurant.destroy
-      render json: {}, status: 200
+      render json: @dummy, status: 200
     end
 
     private

@@ -19,15 +19,20 @@ class Api::V1::UsersController < ApplicationController
 
     def update
       @user = User.find(params[:id])
-      restaurants = params["restaurants"]
-      restaurants.map {|rest| Restaurant.find_by(id: rest[:restId])}
-      @user.update(restaurants: restaurants)
-      render json @user, status: 200
+      restObj = Restaurant.find_by(id: params["restaurant"]["id"])
+      @user.restaurants << restObj
+      render json: @user, status: 200
     end
+
+    # def destroy
+    #   @user = User.find(params[:id])
+    #   restObj = Restaurant.find_by(id: params["restaurant"]["id"])
+    #   @user.restaurants
+    # end
 
     private
     def user_params
-      params.permit(:body)
+      params.permit(:id, :email, :city, :restaurants)
     end
 
 end
